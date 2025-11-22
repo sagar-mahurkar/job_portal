@@ -49,11 +49,7 @@ const transporter = MailTransporter.getInstance();
     await server.init();
 
     await transporter.init();
-
-
-    console.log("EMAIL:", process.env.EMAIL);
-    console.log("PASSWORD LENGTH:", process.env.EMAIL_PASSWORD?.length);
-
+    
     // middlewares
     server.app.use(express.json());
     server.app.use(cors());

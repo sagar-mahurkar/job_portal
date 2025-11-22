@@ -19,6 +19,7 @@ import { User } from "../../entity/User.entity";
 
 // REPOSITORIES
 import { userRepository } from "../../utils/Repositories";
+import { AuthHelper } from "../../utils/AuthHelper";
 import { log } from "console";
 
 // CONSTANTS
@@ -128,9 +129,16 @@ export class UserController {
                 });
             }
 
+            const token: string = AuthHelper.generateJWTToken(
+                newUser.id, 
+                newUser.email, 
+                newUser.role
+            );
+
             new ResponseGenerator(httpStatusCodes.CREATED, {
                 success: true,
                 message: "User registered successfully", 
+                token,
                 user: { 
                     id: newUser.id,
                     name: newUser.name,
@@ -174,9 +182,16 @@ export class UserController {
                 );
             }
 
+            const token: string = AuthHelper.generateJWTToken(
+                user.id, 
+                user.email, 
+                user.role
+            );
+
             new ResponseGenerator(httpStatusCodes.OK, {
                 success: true,
-                message: "User logged in successfully", 
+                message: "User logged in successfully",
+                token, 
                 user: { 
                     id: user.id,
                     name: user.name,
@@ -373,6 +388,12 @@ export class UserController {
             await userRepository.update(
                 { id: user.id },
                 { login_otp: null, login_otp_expiry: null }
+            );
+
+            const token: string = AuthHelper.generateJWTToken(
+                user.id,
+                user.email,
+                user.role
             );
 
             new ResponseGenerator(httpStatusCodes.OK, {
