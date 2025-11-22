@@ -2,6 +2,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToMany,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -10,8 +11,9 @@ import {
 import { UserRole } from "../utils/Enums";
 import { RecruiterDetail } from "./RecruiterDetail.entity";
 import { CandidateDetail } from "./CandidateDetail.entity";
+import { JobPosting } from "./JobPosting.entity";
 
-@Entity({ name: "users", synchronize: true })
+@Entity({ name: "users", synchronize: false })
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
@@ -50,4 +52,8 @@ export class User {
     // one-to-one relationship with CandidateDetail
     @OneToOne(() => CandidateDetail, (candidateDetail) => candidateDetail.user, {cascade: true})
     candidateDetails: CandidateDetail;
+
+    // one-to-many relationship with JobPosting
+    @OneToMany(() => JobPosting, (jobPosting) => jobPosting.user)
+    jobPostings: JobPosting[];
 }

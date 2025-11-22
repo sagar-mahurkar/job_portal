@@ -8,6 +8,6 @@ export const JobPortalDataSource = new DataSource({
     username: process.env.POSTGRES_USERNAME,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DATABASE,
-    synchronize: false,
+    synchronize: true,
     entities: [path.resolve(__dirname, "../entity/*.entity.{ts,js}")],
 });
