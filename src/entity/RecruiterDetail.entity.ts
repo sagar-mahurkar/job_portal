@@ -11,7 +11,7 @@ import {
 import { CompanySector } from "../utils/Enums";
 import { User } from "./User.entity";
 
-@Entity({ name: "recruiter_details", synchronize: true })
+@Entity({ name: "recruiter_details", synchronize: false })
 export class RecruiterDetail {
 
     // one-to-one relationship with User
