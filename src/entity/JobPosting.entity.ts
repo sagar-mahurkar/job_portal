@@ -31,7 +31,7 @@ export class JobPosting {
     @Column()
     no_of_vacancies: number;
 
-    @Column()
+    @Column({ default: 0 })
     no_of_applicants: number;
 
     @CreateDateColumn({ type: "timestamptz" })

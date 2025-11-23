@@ -20,7 +20,10 @@ export class UserAuth {
         try {
             const authHeader = request.headers.authorization;
 
-            if (!authHeader) throw new Error("Authorization header is missing");
+            if (!authHeader) throw new ErrorHandler(
+                httpStatusCodes.UN_AUTHORIZED,
+                "Authorization header is missing"
+            );
             
             // extract the token from the header
             const token = authHeader.split(" ")[1];

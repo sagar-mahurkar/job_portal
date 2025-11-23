@@ -18,12 +18,12 @@ class JobPostingRouter {
 
     private _configure() {
         this._router.post(
-            "/job", 
+            "/", 
             this._auth, 
             this._jobPostingController.createJobPosting
         );
         this._router.get(
-            "/jobs", 
+            "/", 
             this._auth, 
             this._jobPostingController.getAllJobPostings
         );
