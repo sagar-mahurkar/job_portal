@@ -4,12 +4,14 @@ import {
     Entity, 
     JoinColumn,
     ManyToOne, 
+    OneToMany, 
     PrimaryGeneratedColumn, 
     UpdateDateColumn 
 } from "typeorm";
 
 import { CandidateQualification, CompanySector } from "../utils/Enums";
 import { User } from "./User.entity";
+import { JobApplication } from "./JobApplication.entity";
 
 @Entity({ name: "job_postings", synchronize: false })
 export class JobPosting {
@@ -44,4 +46,9 @@ export class JobPosting {
     @ManyToOne(() => User, (user) => user.jobPostings)
     @JoinColumn({ name: "user_id" })
     user: User;
+
+    // one-to-many relationship with JobApplication entity
+    @OneToMany(() => JobApplication, (jobApplication) => jobApplication.jobPostings)
+    @JoinColumn({ name: "job_posting_id" })
+    applications: JobApplication[];
 }

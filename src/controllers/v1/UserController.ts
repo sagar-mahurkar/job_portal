@@ -116,7 +116,7 @@ export class UserController {
                     email,
                     password: hashedPassword,
                     role,
-                    candidate_details: {
+                    candidateDetails: {
                         current_sector,
                         experience,
                         qualification,
